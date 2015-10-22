@@ -1,0 +1,32 @@
+{
+  "name": "jsonapitest",
+  "version": "0.0.35",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peter/jsonapitest"
+  },
+  "description": "JSON driven testing of HTTP APIs",
+  "main": "index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "./bin/test",
+    "test-unit": "./bin/test-unit",
+    "test-integration": "./bin/test-integration"
+  },
+  "author": "Peter Marklund",
+  "license": "ISC",
+  "dependencies": {
+    "assert-duck-type": "^0.0.2",
+    "async": "^0.8.0",
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.2",
+    "jayschema": "^0.2.7",
+    "lodash": "^2.4.1",
+    "request": "^2.36.0",
+    "superagent": "^0.18.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1",
+    "mocha-lcov-reporter": "^0.0.1"
+  }
+}

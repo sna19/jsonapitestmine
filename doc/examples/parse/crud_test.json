@@ -1,0 +1,69 @@
+{
+  "suite": {
+    "name": "Parse CRUD",
+    "tests": [
+      {
+        "name": "create_get_list_update_delete",
+        "description": "You can create a Parse object, get it, update its name, and then delete it",
+        "api_calls": [
+          {
+            "it": "can create a GameScore object",
+            "request": "POST /classes/GameScore",
+            "params": "{{users.joe}}",
+            "status": 201,
+            "assert": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "createdAt": {"type": "string"},
+                  "objectId": {"type": "string"}
+                },
+                "required": ["createdAt", "objectId"],
+                "additionalProperties": false
+              }
+            },
+            "save": {
+              "users.joe.objectId": "body.objectId"
+            }
+          },
+          {
+            "it": "can get the created GameScore object",
+            "request": "GET /classes/GameScore/{{users.joe.objectId}}",
+            "assert": [
+              {
+                "schema": "{{schema.user}}"
+              },
+              {
+                "equal_keys": "{{users.joe}}"
+              }
+            ]
+          },
+          {
+            "it": "can update name of GameScore object",
+            "request": "PUT /classes/GameScore/{{users.joe.objectId}}",
+            "params": {
+              "playerName": "New name"
+            }
+          },
+          {
+            "it": "can get new name of GameScore object",
+            "request": "GET /classes/GameScore/{{users.joe.objectId}}",
+            "assert": {
+              "select": "body.playerName",
+              "equal": "New name"
+            }
+          },
+          {
+            "it": "can delete GameScore object",
+            "request": "DELETE /classes/GameScore/{{users.joe.objectId}}"
+          },
+          {
+            "it": "can verify that GameScore object was deleted",
+            "request": "GET /classes/GameScore/{{users.joe.objectId}}",
+            "status": 404
+          }
+        ]
+      }
+    ]
+  }
+}
